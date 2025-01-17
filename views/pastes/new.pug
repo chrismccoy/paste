@@ -6,30 +6,20 @@ mixin select(languages, selected)
 doctype html
 html
   head
-    link(rel='icon',type='image/png',href='/images/pastie.png')
-    link(rel='shortcut icon',type='image/png',href='/images/pastie.png')
-    title Pastie
+    title Paste
     link#hljsTheme(rel="stylesheet", href=`/css/v/${theme}`)
     link(rel="stylesheet", href=`${asset("/css/main.css")}`)
     each item in THEMES
       if theme != item.file && item.file != ""
         link(rel="prefetch" as="style" href=`/css/v/${item.file}`)
   body.hljs.editor
-    //- header
-    //-   .data
-    //-     .item
-    //-       | Pastie
-    //-     .item
-    //-       a(href="/") New
-    //-     .item
-    //-       a(href="/m/changelog") Changelog
 
     section
       form#frm(method='post',action='/pastes/create')
         div#toolbar
           div.langPicker
             +select(LANGUAGES)(name="language", id="language",tabindex=5)
-          div Expires in 24 hours
+          div Expires in 1 Year
           div
             button(tabindex=20) Save Paste
         textarea#editor.hljs(name='content',tabindex=10, placeholder="Please paste your content here...")
