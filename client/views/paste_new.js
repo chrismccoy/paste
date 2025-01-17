@@ -1,14 +1,17 @@
-import {getCookie, setCookie} from "../cookies.js"
+import { getCookie, setCookie } from "../cookies.js";
 
 const pasteNew = () => {
-    document.getElementById("editor").focus()
+    const editor = document.getElementById("editor");
+    const languageSelector = document.getElementById("language");
+    
+    editor.focus();
 
-    var lang = getCookie("language") || "plaintext";
-    const pickLanguage = document.getElementById("language")
-    pickLanguage.value = lang;
-    pickLanguage.addEventListener("change", (event) => {
-        setCookie("language", event.target.value, {until: Infinity});
-    })
-}
+    const lang = getCookie("language") || "plaintext";
+    languageSelector.value = lang;
 
-export { pasteNew }
+    languageSelector.addEventListener("change", (event) => {
+        setCookie("language", event.target.value, { expires: Infinity });
+    });
+};
+
+export { pasteNew };
