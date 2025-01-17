@@ -1,32 +1,25 @@
 const migrations = {
     directory: "./db/migrations",
     tableName: "migrations"
-}
+};
+
+const createConnectionConfig = (client, connection) => ({
+    client,
+    connection,
+    migrations
+});
 
 const config = {
-    production: {
-        client: 'pg',
-        connection: process.env["DATABASE_URL"],
-        migrations
-    },
-    development: {
-        client: 'pg',
-        connection: {
-            host: "localhost",
-            user: "pastie",
-            password: "localdev",
-            database: "pastie"
-        },
-        migrations
-    },
-    development_sqlite: {
-        client: 'sqlite3',
-        useNullAsDefault: true,
-        connection: {
-          filename: "./db/development.sqlite"
-        },
-        migrations
-    }
-}
+    production: createConnectionConfig('pg', process.env["DATABASE_URL"]),
+    development: createConnectionConfig('pg', {
+        host: "localhost",
+        user: "pastie",
+        password: "localdev",
+        database: "pastie"
+    }),
+    development_sqlite: createConnectionConfig('sqlite3', {
+        filename: "./db/development.sqlite"
+    })
+};
 
-module.exports=config;
+module.exports = config;
