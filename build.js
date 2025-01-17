@@ -1,17 +1,21 @@
-const exec = require('child_process').execSync
+const { execSync } = require('child_process');
+const { LANGUAGES, skipBuild } = require("./client/languages");
 
-function run(cmd, opts = {}) {
-    opts.stdio = ["inherit", "inherit", "inherit"]
-    exec(cmd, opts)
+function runCommand(command, options = {}) {
+    options.stdio = ["inherit", "inherit", "inherit"];
+    execSync(command, options);
 }
 
-const { LANGUAGES, skipBuild } = require("./client/languages")
-const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l))
+const languagesToBuild = Object.keys(LANGUAGES).filter(language => !skipBuild.includes(language));
 
-run(`node ./tools/build.js -t browser ${languages.join(" ")}`, {cwd: "./work/highlight.js"})
-run(`cp work/highlight.js/build/highlight.min.js public/js/highlight.js`)
-run("./node_modules/.bin/rollup -c")
-run("gzip -f -k public/js/highlight.js")
-run("brotli -f -k public/js/highlight.js")
-run("gzip -f -k public/js/bundle.js")
-run("brotli -f -k public/js/bundle.js")
+const buildCommands = [
+    `node ./tools/build.js -t browser ${languagesToBuild.join(" ")}`,
+    `cp work/highlight.js/build/highlight.min.js public/js/highlight.js`,
+    `./node_modules/.bin/rollup -c`,
+    `gzip -f -k public/js/highlight.js`,
+    `brotli -f -k public/js/highlight.js`,
+    `gzip -f -k public/js/bundle.js`,
+    `brotli -f -k public/js/bundle.js`
+];
+
+buildCommands.forEach(command => runCommand(command, { cwd: "./work/highlight.js" }));
