@@ -1,10 +1,15 @@
 #!/usr/bin/env node
+
 'use strict';
 
-// very poor man's console, could probably be much improved
-
-require("../config/boot")
+require("../config/boot");
 
 const repl = require('repl');
+
+// Start the REPL in strict mode
 const cli = repl.start({ replMode: repl.REPL_MODE_STRICT });
-cli.context.Paste = require('../app/models/paste')
+
+// Load the Paste model into the REPL context
+const Paste = require('../app/models/paste');
+cli.context.Paste = Paste;
+
