@@ -1,4 +1,3 @@
-
 exports.up = function(knex) {
   return knex.schema.createTable('pastes', (table) => {
     table.increments("id");
@@ -12,3 +11,4 @@ exports.up = function(knex) {
 exports.down = function(knex) {
   knex.schema.dropTable("pastes")
 };
+
