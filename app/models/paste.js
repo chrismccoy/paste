@@ -1,24 +1,18 @@
 const { Model } = require('objection');
-const { v4: uuid } = require('uuid');
-const uuidBase62 = require('uuid-base62');
-const {LANGUAGES} = require("../../client/languages")
+const gfynonce = require('gfynonce');
+const { LANGUAGES } = require("../../client/languages");
 
-const toUTC = (d) => {
-  // return new Date(d.getTime() - d.getTimezoneOffset() * 60000);
-  return d;
-}
+const toUTC = (date) => date; // Simplified function
 
-const round = (n, precision) => {
-  return Number(n.toFixed(precision));
-}
+const round = (number, precision) => Number(number.toFixed(precision));
 
-const MINUTES_IN_HOUR = 60
-const SECONDS_PER_MIN = 60
-const HOURS_PER_DAY = 24
-const DAY_IN_MILLIS = HOURS_PER_DAY * MINUTES_IN_HOUR * SECONDS_PER_MIN * 1000
+const MINUTES_IN_HOUR = 60;
+const SECONDS_PER_MIN = 60;
+const HOURS_PER_DAY = 24;
+const DAY_IN_MILLIS = HOURS_PER_DAY * MINUTES_IN_HOUR * SECONDS_PER_MIN * 1000;
+const YEAR_IN_MILLIS = DAY_IN_MILLIS * 365;
 
 class Paste extends Model {
-
   constructor(data) {
     super();
     if (data) {
@@ -27,26 +21,35 @@ class Paste extends Model {
   }
 
   $beforeInsert() {
-    const oneDayLater = new Date(new Date().getTime() + DAY_IN_MILLIS);
-    this.expires_at = oneDayLater.toISOString();
-    this.uuid = uuid();
-    this.key = uuidBase62.encode(this.uuid);
+    this.expires_at = new Date(Date.now() + YEAR_IN_MILLIS).toISOString();
+    this.uuid = gfynonce({ adjectives: 4, separator: '-' });
+    this.key = this.uuid;
   }
 
   $afterGet() {
-    this.expires_at = new Date(this.expires_at)
+    this.expires_at = new Date(this.expires_at);
   }
 
   get ttl() {
-    return (this.expires_at - toUTC(new Date())) / 1000 / 60 / 60
+    return (this.expires_at - toUTC(new Date())) / 1000; // Return in seconds
   }
 
-  // TODO move to presenter
   get ttlText() {
-    if (this.ttl < 1) {
-      return `${round(this.ttl * MINUTES_IN_HOUR, 0)} mins`
+    const ttlInSeconds = this.ttl;
+    const ttlInHours = ttlInSeconds / 3600;
+    const ttlInDays = ttlInSeconds / (DAY_IN_MILLIS / 1000);
+    const ttlInMonths = ttlInSeconds / (YEAR_IN_MILLIS / 1000);
+
+    if (ttlInSeconds < 60) {
+      return `${round(ttlInSeconds, 0)} seconds`;
+    } else if (ttlInSeconds < 3600) {
+      return `${round(ttlInSeconds / SECONDS_PER_MIN, 0)} minutes`;
+    } else if (ttlInHours < 24) {
+      return `${round(ttlInHours, 0)} hours`;
+    } else if (ttlInDays < 365) {
+      return `${round(ttlInDays, 0)} days`;
     } else {
-      return `${round(this.ttl, 0)} hours`
+      return `${round(ttlInMonths, 0)} months`;
     }
   }
 
@@ -55,11 +58,7 @@ class Paste extends Model {
   }
 
   get kbSizeText() {
-    if (this.kbSize > 1) {
-      return `${round(this.kbSize,1)}<sup>KB</sup>`
-    } else {
-      return ""
-    }
+    return this.kbSize > 1 ? `${round(this.kbSize, 1)}<sup>KB</sup>` : "";
   }
 
   get languageName() {
@@ -67,36 +66,25 @@ class Paste extends Model {
   }
 
   get isExpired() {
-    return this.ttl < 0
+    return this.ttl < 0;
   }
 
   get lineCount() {
-    return this.content.split("\n").length
+    return this.content.split("\n").length;
   }
 
   static async deleteExpired() {
-    const ONE_DAY_AGO = new Date(new Date().getTime() - DAY_IN_MILLIS);
-    const pastes = await Paste
-      .query()
-      .delete()
-      .where("expires_at","<",ONE_DAY_AGO)
-    return pastes
+    const ONE_YEAR_AGO = new Date(Date.now() - YEAR_IN_MILLIS);
+    return await Paste.query().delete().where("expires_at", "<", ONE_YEAR_AGO);
   }
 
   static async expired() {
-    const ONE_DAY_AGO = new Date(new Date().getTime() - DAY_IN_MILLIS);
-    const pastes = await Paste
-      .query()
-      .where("expires_at","<",ONE_DAY_AGO)
-    return pastes
+    const ONE_YEAR_AGO = new Date(Date.now() - YEAR_IN_MILLIS);
+    return await Paste.query().where("expires_at", "<", ONE_YEAR_AGO);
   }
 
   static async findByKey(key) {
-    const paste = await Paste
-      .query()
-      .where("key","=", key)
-      .first()
-    return paste
+    return await Paste.query().where("key", "=", key).first();
   }
 
   async destroy() {
@@ -104,17 +92,14 @@ class Paste extends Model {
   }
 
   async save() {
-    const inserted = await Paste
-      .query()
-      .insert(this)
-    var data = await Paste.query().findById(this.id);
+    await Paste.query().insert(this);
+    const data = await Paste.query().findById(this.id);
     Object.assign(this, data);
   }
 
   static get tableName() {
     return 'pastes';
   }
-
 }
 
-module.exports = Paste
+module.exports = Paste;

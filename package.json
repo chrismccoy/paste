@@ -1,7 +1,7 @@
 {
-  "name": "pastie_express",
-  "version": "0.1.0",
-  "description": "Pastie",
+  "name": "paste",
+  "version": "1.0.0",
+  "description": "Paste is a paste server based on pastie.org",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yyyc514/pastie_express.git"
+    "url": "git+https://github.com/chrismccoy/paste.git"
   },
   "keywords": [
     "pastes",
     "snippets"
   ],
-  "author": "Josh Goebel",
+  "author": "Chris McCoy and Josh Goebel",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yyyc514/pastie_express/issues"
+    "url": "https://github.com/chrismccoy/paste/issues"
   },
-  "homepage": "https://github.com/yyyc514/pastie_express#readme",
+  "homepage": "https://github.com/chrismccoy/paste",
   "dependencies": {
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",
@@ -38,8 +38,7 @@
     "rollup": "^2.7.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "staticify": "^5.0.0",
-    "uuid": "^8.3.2",
-    "uuid-base62": "^0.1.0"
+    "gfynonce": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.14",
