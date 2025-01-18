@@ -8,6 +8,7 @@ function run(cmd, opts = {}) {
 const { LANGUAGES, skipBuild } = require("./client/languages")
 const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l))
 
+run("node ./db.js");
 run(`node ./tools/build.js -t browser ${languages.join(" ")}`, {cwd: "./work/highlight.js"})
 run(`cp work/highlight.js/build/highlight.min.js public/js/highlight.js`)
 run("./node_modules/.bin/rollup -c")
