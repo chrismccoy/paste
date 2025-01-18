@@ -6,7 +6,8 @@ Paste is based on Pastie Express with some tweaks
 4. SQlite DB Seeder
 5. Minimal Languages
 6. Singular Theme (shades of purple)
-7. Tweaked Build Script 
+7. Added MySQL Support
+8. Tweaked Build Script 
 
 Setup:
 
