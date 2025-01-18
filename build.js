@@ -34,7 +34,7 @@ const commands = [
 ];
 
 commands.forEach(({ cmd, file }, index) => {
-    checkFileExists(file);
+    //checkFileExists(file);
     const options = index === 2 ? { cwd: "./work/highlight.js" } : {};
     runCommand(cmd, options);
 });
