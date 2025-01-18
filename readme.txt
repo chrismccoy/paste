@@ -13,6 +13,8 @@ Setup:
 
 1. git clone --recursive https://github.com/chrismccoy/paste
 2. node build.js
-3. node app.js
+3. edit config/database.js with your database connection details (sqlite,pg,mysql)
+4. node db.js (to seed sqlite if you plan on using sqlite)
+5. node app.js
 
 

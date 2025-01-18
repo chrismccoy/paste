@@ -24,7 +24,6 @@ function checkFileExists(filePath) {
 const commands = [
     { cmd: "yarn", file: "yarn" },
     { cmd: "yarn --cwd work/highlight.js", file: "work/highlight.js/package.json" },
-    { cmd: "node ./db.js", file: "./db.js" },
     { cmd: `node ./tools/build.js -t browser ${languages.join(" ")}`, file: "./tools/build.js" },
     { cmd: "cp work/highlight.js/build/highlight.min.js public/js/highlight.js", file: "work/highlight.js/build/highlight.min.js" },
     { cmd: "rollup -c", file: "rollup.config.js" },
@@ -36,6 +35,6 @@ const commands = [
 
 commands.forEach(({ cmd, file }, index) => {
     checkFileExists(file);
-    const options = index === 3 ? { cwd: "./work/highlight.js" } : {};
+    const options = index === 2 ? { cwd: "./work/highlight.js" } : {};
     runCommand(cmd, options);
 });
