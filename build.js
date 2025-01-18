@@ -14,10 +14,12 @@ function runCommand(cmd, opts = {}) {
 const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l));
 
 const commands = [
+    "yarn",
+    "yarn --cwd work/highlight.js",
     "node ./db.js",
     `node ./tools/build.js -t browser ${languages.join(" ")}`,
     "cp work/highlight.js/build/highlight.min.js public/js/highlight.js",
-    "./node_modules/.bin/rollup -c",
+    "rollup -c",
     "gzip -f -k public/js/highlight.js",
     "brotli -f -k public/js/highlight.js",
     "gzip -f -k public/js/bundle.js",
@@ -25,6 +27,7 @@ const commands = [
 ];
 
 commands.forEach((command, index) => {
-    const options = index === 1 ? { cwd: "./work/highlight.js" } : {};
+    const options = index === 3 ? { cwd: "./work/highlight.js" } : {};
     runCommand(command, options);
 });
+
