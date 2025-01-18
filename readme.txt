@@ -8,3 +8,10 @@ Paste is based on Pastie Express with some tweaks
 6. Singular Theme (shades of purple)
 7. Tweaked Build Script 
 
+Setup:
+
+1. git clone --recursive https://github.com/chrismccoy/paste
+2. node build.js
+3. node app.js
+
+
