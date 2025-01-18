@@ -18,10 +18,16 @@ const config = {
     }),
     development_pg: createConnectionConfig('pg', {
         host: "localhost",
-        user: "pastie",
-        password: "localdev",
-        database: "pastie"
+        user: "username",
+        password: "password",
+        database: "paste"
     }),
+    development_mysql: createConnectionConfig('mysql', {
+        host: "localhost",
+        user: "username",
+        password: "password",
+        database: "paste"
+    })
 };
 
 module.exports = config;
