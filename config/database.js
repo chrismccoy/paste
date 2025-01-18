@@ -10,16 +10,18 @@ const createConnectionConfig = (client, connection) => ({
 });
 
 const config = {
-    production: createConnectionConfig('pg', process.env["DATABASE_URL"]),
-    development: createConnectionConfig('pg', {
+    production: createConnectionConfig('sqlite3', {
+        filename: "./db/db.sqlite"
+    }),
+    development: createConnectionConfig('sqlite3', {
+        filename: "./db/db.sqlite"
+    }),
+    development_pg: createConnectionConfig('pg', {
         host: "localhost",
         user: "pastie",
         password: "localdev",
         database: "pastie"
     }),
-    development_sqlite: createConnectionConfig('sqlite3', {
-        filename: "./db/development.sqlite"
-    })
 };
 
 module.exports = config;
