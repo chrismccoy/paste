@@ -1,5 +1,8 @@
 const { execSync } = require('child_process');
 const { LANGUAGES, skipBuild } = require("./client/languages");
+const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l));
+const fs = require('fs');
+const path = require('path');
 
 function runCommand(cmd, opts = {}) {
     opts.stdio = ["inherit", "inherit", "inherit"];
@@ -11,23 +14,28 @@ function runCommand(cmd, opts = {}) {
     }
 }
 
-const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l));
+function checkFileExists(filePath) {
+    if (!fs.existsSync(filePath)) {
+        console.error(`File does not exist: ${filePath}`);
+        process.exit(1);
+    }
+}
 
 const commands = [
-    "yarn",
-    "yarn --cwd work/highlight.js",
-    "node ./db.js",
-    `node ./tools/build.js -t browser ${languages.join(" ")}`,
-    "cp work/highlight.js/build/highlight.min.js public/js/highlight.js",
-    "rollup -c",
-    "gzip -f -k public/js/highlight.js",
-    "brotli -f -k public/js/highlight.js",
-    "gzip -f -k public/js/bundle.js",
-    "brotli -f -k public/js/bundle.js"
+    { cmd: "yarn", file: "yarn" },
+    { cmd: "yarn --cwd work/highlight.js", file: "work/highlight.js/package.json" },
+    { cmd: "node ./db.js", file: "./db.js" },
+    { cmd: `node ./tools/build.js -t browser ${languages.join(" ")}`, file: "./tools/build.js" },
+    { cmd: "cp work/highlight.js/build/highlight.min.js public/js/highlight.js", file: "work/highlight.js/build/highlight.min.js" },
+    { cmd: "rollup -c", file: "rollup.config.js" },
+    { cmd: "gzip -f -k public/js/highlight.js", file: "public/js/highlight.js" },
+    { cmd: "brotli -f -k public/js/highlight.js", file: "public/js/highlight.js" },
+    { cmd: "gzip -f -k public/js/bundle.js", file: "public/js/bundle.js" },
+    { cmd: "brotli -f -k public/js/bundle.js", file: "public/js/bundle.js" }
 ];
 
-commands.forEach((command, index) => {
+commands.forEach(({ cmd, file }, index) => {
+    checkFileExists(file);
     const options = index === 3 ? { cwd: "./work/highlight.js" } : {};
-    runCommand(command, options);
+    runCommand(cmd, options);
 });
-
