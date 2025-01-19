@@ -4,7 +4,7 @@ const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l));
 const fs = require('fs');
 const path = require('path');
 
-const requiredBinaries = ['yarn', 'brotli', 'rollup'];
+const requiredBinaries = ['yarn', 'rollup'];
 
 function checkBinariesExist() {
     requiredBinaries.forEach(binary => {
@@ -33,10 +33,6 @@ const commands = [
     { cmd: `node ${path.join('tools', 'build.js')} -t browser ${languages.join(" ")}`, file: path.join('tools', 'build.js') },
     { cmd: `cp ${path.join('work', 'highlight.js', 'build', 'highlight.min.js')} ${path.join('public', 'js', 'highlight.js')}`, file: path.join('work', 'highlight.js', 'build', 'highlight.min.js') },
     { cmd: "rollup -c", file: "rollup.config.js" },
-    { cmd: `gzip -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
-    { cmd: `brotli -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
-    { cmd: `gzip -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') },
-    { cmd: `brotli -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') },
     { cmd: "node db.js", file: "db.js" }
 ];
 
