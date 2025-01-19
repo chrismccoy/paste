@@ -28,8 +28,8 @@ function runCommand(cmd, opts = {}) {
 }
 
 const commands = [
-    { cmd: "yarn", file: "yarn" },
-    { cmd: "yarn --cwd work/highlight.js", file: "work/highlight.js/package.json" },
+    { cmd: "yarn install --silent", file: "yarn" },
+    { cmd: "yarn install --silent --cwd work/highlight.js", file: "work/highlight.js/package.json" },
     { cmd: `node ${path.join('tools', 'build.js')} -t browser ${languages.join(" ")}`, file: path.join('tools', 'build.js') },
     { cmd: `cp ${path.join('work', 'highlight.js', 'build', 'highlight.min.js')} ${path.join('public', 'js', 'highlight.js')}`, file: path.join('work', 'highlight.js', 'build', 'highlight.min.js') },
     { cmd: "rollup -c", file: "rollup.config.js" },
