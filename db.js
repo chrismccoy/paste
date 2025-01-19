@@ -36,5 +36,13 @@ const dropPastesTable = async () => {
   }
 };
 
-//dropPastesTable();
-createPastesTable();
+const checkDatabaseExists = async () => {
+  try {
+    await fs.access('./db/db.sqlite');
+    console.log('Paste Database exists.');
+  } catch (error) {
+      createPastesTable()
+  }
+};
+
+checkDatabaseExists();
