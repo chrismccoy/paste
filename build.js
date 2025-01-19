@@ -4,19 +4,25 @@ const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l));
 const fs = require('fs');
 const path = require('path');
 
+const requiredBinaries = ['yarn', 'brotli', 'rollup'];
+
+function checkBinariesExist() {
+    requiredBinaries.forEach(binary => {
+        try {
+            execSync(`${binary} --version`, { stdio: 'ignore' });
+        } catch {
+            console.error(`Error: ${binary} is not installed. Please install it before running the build script.`);
+            process.exit(1);
+        }
+    });
+}
+
 function runCommand(cmd, opts = {}) {
     opts.stdio = ["inherit", "inherit", "inherit"];
     try {
         execSync(cmd, opts);
     } catch (error) {
         console.error(`Error executing command: ${cmd}\n`, error.message);
-        process.exit(1);
-    }
-}
-
-function checkFileExists(filePath) {
-    if (!fs.existsSync(filePath)) {
-        console.error(`File does not exist: ${filePath}`);
         process.exit(1);
     }
 }
@@ -33,8 +39,9 @@ const commands = [
     { cmd: "brotli -f -k public/js/bundle.js", file: "public/js/bundle.js" }
 ];
 
+checkBinariesExist();
+
 commands.forEach(({ cmd, file }, index) => {
-    //checkFileExists(file);
     const options = index === 2 ? { cwd: "./work/highlight.js" } : {};
     runCommand(cmd, options);
 });
