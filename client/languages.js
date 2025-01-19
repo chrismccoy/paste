@@ -1,17 +1,20 @@
 const SKIP_BUILD = ["html"]
 const languages = {
-    // common
     apache: "Apache Config",
+    awk: "Awk",
     bash: "Bash",
     coffeescript: "CoffeeScript",
     css: "CSS",
     go: "Go",
+    graphql: "GraphQL",
     javascript: "JavaScript",
+    json: "Json",
     nginx: "Nginx Config",
     perl: "Perl",
     plaintext: "Text",
     python: "Python",
     php: "PHP",
+    powershell: "Powershell",
     rust: "Rust",
     ruby: "Ruby",
     scss: "SCSS",
