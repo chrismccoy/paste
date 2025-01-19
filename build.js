@@ -28,10 +28,9 @@ function runCommand(cmd, opts = {}) {
 }
 
 const commands = [
-    { cmd: "node", file: "db.js" },
     { cmd: "yarn", file: "yarn" },
     { cmd: "yarn --cwd work/highlight.js", file: "work/highlight.js/package.json" },
-    { cmd: `node ${path.join(__dirname, 'tools', 'build.js')} -t browser ${languages.join(" ")}`, file: path.join(__dirname, 'tools', 'build.js') },
+    { cmd: `node ${path.join('tools', 'build.js')} -t browser ${languages.join(" ")}`, file: path.join('tools', 'build.js') },
     { cmd: `cp ${path.join('work', 'highlight.js', 'build', 'highlight.min.js')} ${path.join('public', 'js', 'highlight.js')}`, file: path.join('work', 'highlight.js', 'build', 'highlight.min.js') },
     { cmd: "rollup -c", file: "rollup.config.js" },
     { cmd: `gzip -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
@@ -43,7 +42,7 @@ const commands = [
 checkBinariesExist();
 
 commands.forEach(({ cmd, file }, index) => {
-    const options = index === 3 ? { cwd: path.join(__dirname, 'work', 'highlight.js') } : {};
+    const options = index === 2 ? { cwd: path.join(__dirname, 'work', 'highlight.js') } : {};
     runCommand(cmd, options);
 });
 
