@@ -25,4 +25,16 @@ const createPastesTable = async () => {
   }
 };
 
+const dropPastesTable = async () => {
+  try {
+    await knex.schema.dropTableIfExists('pastes');
+    console.log("Pastes database dropped.");
+  } catch (error) {
+    console.error("Error dropping pastes database:", error);
+  } finally {
+    await knex.destroy();
+  }
+};
+
+//dropPastesTable();
 createPastesTable();
