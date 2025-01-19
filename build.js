@@ -11,7 +11,7 @@ function checkBinariesExist() {
         try {
             execSync(`${binary} --version`, { stdio: 'ignore' });
         } catch {
-            console.error(`Error: ${binary} is not installed. Please install it before running the build script.`);
+            console.error(`Error: ${binary} is not installed. Please install it before running the script.`);
             process.exit(1);
         }
     });
@@ -28,20 +28,22 @@ function runCommand(cmd, opts = {}) {
 }
 
 const commands = [
+    { cmd: "node", file: "db.js" },
     { cmd: "yarn", file: "yarn" },
     { cmd: "yarn --cwd work/highlight.js", file: "work/highlight.js/package.json" },
-    { cmd: `node ./tools/build.js -t browser ${languages.join(" ")}`, file: "./tools/build.js" },
-    { cmd: "cp work/highlight.js/build/highlight.min.js public/js/highlight.js", file: "work/highlight.js/build/highlight.min.js" },
+    { cmd: `node ${path.join(__dirname, 'tools', 'build.js')} -t browser ${languages.join(" ")}`, file: path.join(__dirname, 'tools', 'build.js') },
+    { cmd: `cp ${path.join('work', 'highlight.js', 'build', 'highlight.min.js')} ${path.join('public', 'js', 'highlight.js')}`, file: path.join('work', 'highlight.js', 'build', 'highlight.min.js') },
     { cmd: "rollup -c", file: "rollup.config.js" },
-    { cmd: "gzip -f -k public/js/highlight.js", file: "public/js/highlight.js" },
-    { cmd: "brotli -f -k public/js/highlight.js", file: "public/js/highlight.js" },
-    { cmd: "gzip -f -k public/js/bundle.js", file: "public/js/bundle.js" },
-    { cmd: "brotli -f -k public/js/bundle.js", file: "public/js/bundle.js" }
+    { cmd: `gzip -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
+    { cmd: `brotli -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
+    { cmd: `gzip -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') },
+    { cmd: `brotli -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') }
 ];
 
 checkBinariesExist();
 
 commands.forEach(({ cmd, file }, index) => {
-    const options = index === 2 ? { cwd: "./work/highlight.js" } : {};
+    const options = index === 3 ? { cwd: path.join(__dirname, 'work', 'highlight.js') } : {};
     runCommand(cmd, options);
 });
+

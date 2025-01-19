@@ -12,7 +12,6 @@ Setup:
 
 1. git clone --recursive https://github.com/chrismccoy/paste
 2. node build.js
-3. node db.js to seed sqlite database
 4. node app.js
 
 
