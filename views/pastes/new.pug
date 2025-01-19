@@ -8,7 +8,7 @@ html
   head
     title Paste
     link#hljsTheme(rel="stylesheet", href=`/css/${theme}`)
-    link(rel="stylesheet", href=`${asset("/css/main.css")}`)
+    link(rel="stylesheet", href=`${asset("/css/app.css")}`)
     each item in THEMES
       if theme != item.file && item.file != ""
         link(rel="prefetch" as="style" href=`/css/${item.file}`)
