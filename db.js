@@ -17,9 +17,9 @@ const createPastesTable = async () => {
       table.datetime("expires_at").notNullable();
       table.timestamps(false, true);
     });
-    console.log("Pastes table created successfully.");
+    console.log("Pastes database created successfully.");
   } catch (error) {
-    console.error("Error creating pastes table:", error);
+    console.error("Error creating pastes database:", error);
   } finally {
     await knex.destroy();
   }

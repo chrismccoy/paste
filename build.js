@@ -36,7 +36,8 @@ const commands = [
     { cmd: `gzip -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
     { cmd: `brotli -f -k ${path.join('public', 'js', 'highlight.js')}`, file: path.join('public', 'js', 'highlight.js') },
     { cmd: `gzip -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') },
-    { cmd: `brotli -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') }
+    { cmd: `brotli -f -k ${path.join('public', 'js', 'bundle.js')}`, file: path.join('public', 'js', 'bundle.js') },
+    { cmd: "node db.js", file: "db.js" }
 ];
 
 checkBinariesExist();
