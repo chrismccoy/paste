@@ -33,6 +33,7 @@ const commands = [
     { cmd: `node ${path.join('tools', 'build.js')} -t browser ${languages.join(" ")}`, file: path.join('tools', 'build.js') },
     { cmd: `cp ${path.join('work', 'highlight.js', 'build', 'highlight.min.js')} ${path.join('public', 'js', 'highlight.js')}`, file: path.join('work', 'highlight.js', 'build', 'highlight.min.js') },
     { cmd: "rollup -c", file: "rollup.config.js" },
+    { cmd: "sass --style=compressed public/css/app.scss public/css/app.css", file: "public/css/app.scss" },
     { cmd: "node db.js", file: "db.js" }
 ];
 
