@@ -1,5 +1,4 @@
 const { LANGUAGES } = require("../../client/languages.js");
-const { THEMES } = require("../../client/themes.js");
 const { Controller } = require("./base_controller.js");
 const Paste = require("../models/paste.js");
 
@@ -15,15 +14,10 @@ const periodically = async (fn, { every }) => {
 class PastesController extends Controller {
   constructor(...args) {
     super(...args);
-    this.initialize();
-  }
-
-  initialize() {
-    this.response.locals.theme = this.request.cookies.theme || THEMES.default;
   }
 
   new() {
-    this.render("pastes/new", { LANGUAGES, THEMES });
+    this.render("pastes/new", { LANGUAGES });
   }
 
   async loadPaste() {

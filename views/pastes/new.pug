@@ -7,11 +7,8 @@ doctype html
 html
   head
     title Paste
-    link#hljsTheme(rel="stylesheet", href=`/css/${theme}`)
+    link#hljsTheme(rel="stylesheet", href=`/css/code.css`)
     link(rel="stylesheet", href=`${asset("/css/app.css")}`)
-    each item in THEMES
-      if theme != item.file && item.file != ""
-        link(rel="prefetch" as="style" href=`/css/${item.file}`)
   body.hljs.editor
 
     section
