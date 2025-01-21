@@ -1,7 +1,6 @@
 const { execSync } = require('child_process');
 const { LANGUAGES, skipBuild } = require("./client/languages");
 const languages = Object.keys(LANGUAGES).filter((l) => !skipBuild.includes(l));
-const fs = require('fs');
 const path = require('path');
 
 function runCommand(cmd, opts = {}) {
