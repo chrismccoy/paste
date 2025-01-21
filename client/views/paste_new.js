@@ -8,9 +8,11 @@ const pasteNew = () => {
     const pickLanguage = document.getElementById("language");
     pickLanguage.value = lang;
 
-    pickLanguage.addEventListener("change", ({ target }) => {
-        setCookie("language", target.value, { until: Infinity });
-    });
+    const updateLanguageCookie = (event) => {
+        setCookie("language", event.target.value, { until: Infinity });
+    };
+
+    pickLanguage.addEventListener("change", updateLanguageCookie);
 };
 
 export { pasteNew };
