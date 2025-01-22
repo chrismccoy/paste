@@ -23,8 +23,8 @@ class Paste extends Model {
     $beforeInsert() {
         this.expires_at = new Date(Date.now() + YEAR_IN_MILLIS).toISOString();
         this.uuid = slug({
-            includeRandomAdverbs: true,
-            includePredicate: true,
+            includeRandomAdverbs: false,
+            includePredicate: false,
             delimiter: ".",
             capitalizeFirstWord: false,
             capitalizeAllWords: false,
