@@ -38,10 +38,10 @@
     "rollup": "^2.79.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "sass": "^1.83.4",
+    "sqlite3": "^5.1.7",
     "staticify": "^5.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22",
-    "sqlite3": "github:mapbox/node-sqlite3#918052b538b0effe6c4a44c74a16b2749c08a0d2"
+    "nodemon": "^2.0.22"
   }
 }
