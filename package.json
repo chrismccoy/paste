@@ -30,7 +30,6 @@
     "express": "^4.21.2",
     "express-request-id": "^1.4.1",
     "express-static-gzip": "^2.2.0",
-    "gfynonce": "^1.0.2",
     "knex": "^0.21.21",
     "morgan": "^1.10.0",
     "objection": "^2.2.18",
@@ -39,7 +38,8 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "sass": "^1.83.4",
     "sqlite3": "^5.1.7",
-    "staticify": "^5.0.0"
+    "staticify": "^5.0.0",
+    "ultra-ignorant-aardvark": "^1.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
