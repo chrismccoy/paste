@@ -16,4 +16,8 @@ Setup:
 2. node build.js
 3. node app.js
 
+To start with a fresh database simply delete the db/db.sqlite file and run:
 
+node db.js
+
+This will create the db.sqlite and add the proper table
