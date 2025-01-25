@@ -37,6 +37,7 @@
     "rollup": "^2.79.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "sass": "^1.83.4",
+    "short-id": "^0.1.0-1",
     "sqlite3": "^5.1.7",
     "staticify": "^5.0.0",
     "ultra-ignorant-aardvark": "^1.0.1"

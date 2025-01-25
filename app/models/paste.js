@@ -1,9 +1,9 @@
 const { Model } = require("objection");
-const slug = require("ultra-ignorant-aardvark");
+const shortId = require('short-id');
+const slugify = require("ultra-ignorant-aardvark");
 const { LANGUAGES } = require("../../client/languages");
 
 const toUTC = (date) => date; // Simplified function
-
 const round = (number, precision) => Number(number.toFixed(precision));
 
 const MINUTES_IN_HOUR = 60;
@@ -11,6 +11,19 @@ const SECONDS_PER_MIN = 60;
 const HOURS_PER_DAY = 24;
 const DAY_IN_MILLIS = HOURS_PER_DAY * MINUTES_IN_HOUR * SECONDS_PER_MIN * 1000;
 const YEAR_IN_MILLIS = DAY_IN_MILLIS * 365;
+
+const generateLink = () => {
+    const postId = shortId.generate();
+    const permalink = slugify({
+        includeRandomAdverbs: false,
+        includePredicate: false,
+        delimiter: ".",
+        capitalizeFirstWord: false,
+        capitalizeAllWords: false,
+        includeRandomEndingPunctuation: false
+    });
+    return `${permalink}.${postId}`;
+};
 
 class Paste extends Model {
     constructor(data) {
@@ -22,14 +35,7 @@ class Paste extends Model {
 
     $beforeInsert() {
         this.expires_at = new Date(Date.now() + YEAR_IN_MILLIS).toISOString();
-        this.uuid = slug({
-            includeRandomAdverbs: false,
-            includePredicate: false,
-            delimiter: ".",
-            capitalizeFirstWord: false,
-            capitalizeAllWords: false,
-            includeRandomEndingPunctuation: false,
-        });
+        this.uuid = generateLink();
         this.key = this.uuid;
     }
 
