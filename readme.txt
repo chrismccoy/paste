@@ -15,7 +15,7 @@ Setup:
 
 1. git clone --recursive https://github.com/chrismccoy/paste
 2. make
-2. make run
+3. make run
 
 Rebuild the Database:
 
