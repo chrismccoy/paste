@@ -9,15 +9,18 @@ Paste is based on Pastie Express with some tweaks
 7. Build Script 
 8. Added nginx.conf proxy example
 9. Added apache.conf proxy example
+10. Makefile 
 
 Setup:
 
 1. git clone --recursive https://github.com/chrismccoy/paste
-2. node build.js
-3. node app.js
+2. make
 
-To start with a fresh database simply delete the db/db.sqlite file and run:
+Rebuild the Database:
 
-node db.js
+1. make rebuild
 
-This will create the db.sqlite and add the proper table
+Clean up by removing the sqlite database and node modules
+
+1. make clean
+
