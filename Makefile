@@ -1,4 +1,4 @@
-.PHONY: all install rebuild clean
+.PHONY: all install rebuild clean run
 
 all: install
 
@@ -18,6 +18,14 @@ rebuild:
 		node db.js; \
 	else \
 		echo "No database file found."; \
+	fi
+
+run:
+	@if [ -f db/db.sqlite ]  && [ -d node_modules ]; then \
+		echo "Node Modules and Database exists. Running..."; \
+		node app.js; \
+	else \
+		echo "Please build the app before attempting to run it."; \
 	fi
 
 clean:
