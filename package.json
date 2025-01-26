@@ -30,7 +30,7 @@
     "express": "^4.21.2",
     "express-request-id": "^1.4.1",
     "express-static-gzip": "^2.2.0",
-    "knex": "^0.21.21",
+    "knex": "^2.4.0",
     "morgan": "^1.10.0",
     "objection": "^2.2.18",
     "pug": "^3.0.3",
