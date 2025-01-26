@@ -3,7 +3,7 @@ const shortId = require('short-id');
 const slugify = require("ultra-ignorant-aardvark");
 const { LANGUAGES } = require("../../client/languages");
 
-const toUTC = (date) => date; // Simplified function
+const toUTC = (date) => date.toISOString(); // Convert date to UTC string
 const round = (number, precision) => Number(number.toFixed(precision));
 
 const MINUTES_IN_HOUR = 60;
@@ -44,7 +44,8 @@ class Paste extends Model {
     }
 
     get ttl() {
-        return (this.expires_at - toUTC(new Date())) / 1000; // Return in seconds
+        const currentTime = new Date();
+        return (new Date(this.expires_at) - currentTime) / 1000; // Return in seconds
     }
 
     get ttlText() {
@@ -88,12 +89,12 @@ class Paste extends Model {
 
     static async deleteExpired() {
         const ONE_YEAR_AGO = new Date(Date.now() - YEAR_IN_MILLIS);
-        return await Paste.query().delete().where("expires_at", "<", ONE_YEAR_AGO);
+        return await Paste.query().delete().where("expires_at", "<", ONE_YEAR_AGO.toISOString());
     }
 
     static async expired() {
         const ONE_YEAR_AGO = new Date(Date.now() - YEAR_IN_MILLIS);
-        return await Paste.query().where("expires_at", "<", ONE_YEAR_AGO);
+        return await Paste.query().where("expires_at", "<", ONE_YEAR_AGO.toISOString());
     }
 
     static async findByKey(key) {
