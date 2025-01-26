@@ -14,14 +14,14 @@ Paste is based on Pastie Express with some tweaks
 Setup:
 
 1. git clone --recursive https://github.com/chrismccoy/paste
-2. make
-3. make run
+1. make or node build.js
+3. make run or node app.js
 
 Rebuild the Database:
 
-1. make rebuild
+1. make rebuild or node db.js after removing db.sqlite file
 
-Clean up by removing the sqlite database and node modules
+Clean up:
 
-1. make clean
+1. make clean or rm -f db/db.sqlite && rm -rf node_modules
 
