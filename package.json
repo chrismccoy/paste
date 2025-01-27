@@ -34,7 +34,7 @@
     "morgan": "^1.10.0",
     "objection": "^3.1.5",
     "pug": "^3.0.3",
-    "rollup": "^2.79.2",
+    "rollup": "^4.32.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "sass": "^1.83.4",
     "short-id": "^0.1.0-1",
@@ -43,6 +43,6 @@
     "ultra-ignorant-aardvark": "^1.0.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.9"
   }
 }
