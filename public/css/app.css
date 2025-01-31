@@ -8,37 +8,31 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-size: 17px;
-
-  &.editor {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-
-    section {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    footer {
-      position: relative;
-    }
-
-    form {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    footer.hljs {
-      display: none;
-    }
-  }
-
-  &.hljs {
-    margin: 0;
-    padding: 0;
-  }
+}
+body.editor {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+body.editor section {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+body.editor footer {
+  position: relative;
+}
+body.editor form {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+body.editor footer.hljs {
+  display: none;
+}
+body.hljs {
+  margin: 0;
+  padding: 0;
 }
 
 em, sup {
@@ -52,22 +46,19 @@ header {
   opacity: 0.8;
   background: rgba(0, 0, 0, 0.5);
   font-size: 1rem;
-
-  a {
-    color: #69c;
-  }
-
-  .item {
-    display: inline-block;
-    padding: 3px 15px;
-    border-right: 1px solid rgba(128, 128, 128, 0.5);
-  }
-
-  .tools {
-    float: right;
-    padding-top: 2px;
-    margin-right: 120px;
-  }
+}
+header a {
+  color: #69c;
+}
+header .item {
+  display: inline-block;
+  padding: 3px 15px;
+  border-right: 1px solid rgba(128, 128, 128, 0.5);
+}
+header .tools {
+  float: right;
+  padding-top: 2px;
+  margin-right: 120px;
 }
 
 footer {
@@ -83,14 +74,12 @@ footer {
   opacity: 1;
   width: 100%;
   padding: 20px 35px;
-
-  a {
-    color: #69c;
-  }
-
-  &.hljs {
-    padding: 20px 20px;
-  }
+}
+footer a {
+  color: #69c;
+}
+footer.hljs {
+  padding: 20px 20px;
 }
 
 #toolbar {
@@ -102,35 +91,30 @@ footer {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid rgba(128, 128, 128, 0.4);
-
-  div:last-child {
-    flex-grow: 1;
-    text-align: right;
-    margin-right: 120px;
-  }
-
-  .langPicker {
-    padding-right: 1em;
-  }
+}
+#toolbar div:last-child {
+  flex-grow: 1;
+  text-align: right;
+  margin-right: 120px;
+}
+#toolbar .langPicker {
+  padding-right: 1em;
 }
 
 section {
   padding: 5px 30px;
   padding-bottom: 50px;
-
-  &.code {
-    display: flex;
-
-    pre.lineNumbers {
-      margin-right: 1em;
-      text-align: right;
-      opacity: 0.35;
-
-      code {
-        padding-left: 0;
-      }
-    }
-  }
+}
+section.code {
+  display: flex;
+}
+section.code pre.lineNumbers {
+  margin-right: 1em;
+  text-align: right;
+  opacity: 0.35;
+}
+section.code pre.lineNumbers code {
+  padding-left: 0;
 }
 
 .editor section {
@@ -151,10 +135,9 @@ form textarea.hljs {
   outline-width: 0;
   outline: none;
   flex-grow: 1;
-
-  &::placeholder {
-    opacity: 0.35;
-  }
+}
+form textarea.hljs::placeholder {
+  opacity: 0.35;
 }
 
 .hljs-title {
@@ -208,10 +191,9 @@ form textarea.hljs {
 
 .hljs-function {
   color: #88c0d0;
-
-  > .hljs-title {
-    color: #88c0d0;
-  }
+}
+.hljs-function > .hljs-title {
+  color: #88c0d0;
 }
 
 .hljs-keyword, .hljs-literal, .hljs-symbol {
@@ -306,52 +288,40 @@ form textarea.hljs {
   color: #5e81ac;
 }
 
-.abnf {
-  .hljs-attribute {
-    color: #88c0d0;
-  }
-
-  .hljs-symbol {
-    color: #ebcb8b;
-  }
+.abnf .hljs-attribute {
+  color: #88c0d0;
+}
+.abnf .hljs-symbol {
+  color: #ebcb8b;
 }
 
-.apache {
-  .hljs-attribute {
-    color: #88c0d0;
-  }
-
-  .hljs-section {
-    color: #81a1c1;
-  }
+.apache .hljs-attribute {
+  color: #88c0d0;
+}
+.apache .hljs-section {
+  color: #81a1c1;
 }
 
 .arduino .hljs-built_in {
   color: #88c0d0;
 }
 
-.aspectj {
-  .hljs-meta {
-    color: #d08770;
-  }
-
-  > .hljs-title {
-    color: #88c0d0;
-  }
+.aspectj .hljs-meta {
+  color: #d08770;
+}
+.aspectj > .hljs-title {
+  color: #88c0d0;
 }
 
 .bnf .hljs-attribute {
   color: #8fbcbb;
 }
 
-.clojure {
-  .hljs-name {
-    color: #88c0d0;
-  }
-
-  .hljs-symbol {
-    color: #ebcb8b;
-  }
+.clojure .hljs-name {
+  color: #88c0d0;
+}
+.clojure .hljs-symbol {
+  color: #ebcb8b;
 }
 
 .coq .hljs-built_in {
@@ -362,14 +332,11 @@ form textarea.hljs {
   color: #8fbcbb;
 }
 
-.css {
-  .hljs-built_in {
-    color: #88c0d0;
-  }
-
-  .hljs-keyword {
-    color: #d08770;
-  }
+.css .hljs-built_in {
+  color: #88c0d0;
+}
+.css .hljs-keyword {
+  color: #d08770;
 }
 
 .diff .hljs-meta, .ebnf .hljs-attribute {
@@ -392,14 +359,11 @@ form textarea.hljs {
   color: #88c0d0;
 }
 
-.nginx {
-  .hljs-attribute {
-    color: #88c0d0;
-  }
-
-  .hljs-section {
-    color: #5e81ac;
-  }
+.nginx .hljs-attribute {
+  color: #88c0d0;
+}
+.nginx .hljs-section {
+  color: #5e81ac;
 }
 
 .pf .hljs-built_in, .processing .hljs-built_in {
@@ -422,4 +386,3 @@ form textarea.hljs {
 .yaml .hljs-meta {
   color: #d08770;
 }
-
