@@ -1,6 +1,7 @@
 const createConnectionConfig = (client, connection) => ({
     client,
-    connection
+    connection,
+    useNullAsDefault: true
 });
 
 const config = {
