@@ -20,7 +20,7 @@ check_db_file() {
 }
 
 list_pastes() {
-    local ids
+    local keys
     keys=$(sqlite3 "$DB_FILE" "SELECT key FROM pastes;")
 
     if [[ -n "$keys" ]]; then
