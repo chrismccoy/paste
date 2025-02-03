@@ -10,6 +10,7 @@ Paste is based on Pastie Express with some tweaks
 8. Added nginx.conf proxy example
 9. Added apache.conf proxy example
 10. Makefile 
+11. Bash Script to List and Delete Pastes
 
 Setup:
 
@@ -24,4 +25,8 @@ Rebuild the Database:
 Clean up:
 
 1. make clean or rm -f db/db.sqlite && rm -rf node_modules
+
+List and Delete Pastes
+
+1. manage.sh with the arg list/delete will list and delete items in the sqlite database
 
