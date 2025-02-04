@@ -5,7 +5,7 @@ Paste is based on Pastie Express with some tweaks
 3. 1 Year TTL
 4. SQlite DB Creator and Seeder
 5. Minimal Languages
-6. Singular Theme (shades of purple)
+6. Singular Theme (nord)
 7. Build Script 
 8. Added nginx.conf proxy example
 9. Added apache.conf proxy example
