@@ -3,7 +3,6 @@
 # List or Delete Pastes
 
 DB_FILE="db/db.sqlite"
-DOMAIN="https://domain.com"
 
 check_sqlite() {
     if ! command -v sqlite3 &> /dev/null; then
@@ -20,16 +19,11 @@ check_db_file() {
 }
 
 list_pastes() {
-    local keys
-    keys=$(sqlite3 "$DB_FILE" "SELECT key FROM pastes;")
-
-    if [[ -n "$keys" ]]; then
-    	sqlite3 "$DB_FILE" "SELECT key FROM pastes;" | while read -r paste; do
-        	echo "$DOMAIN/$paste"
-        done <<< "$keys"
-    else
-        echo "No items found in the pastes database."
-    fi
+    sqlite3 "$DB_FILE" <<EOF
+.headers on
+.mode column
+SELECT id, language, uuid, expires_at FROM pastes;
+EOF
 }
 
 delete_pastes() {
