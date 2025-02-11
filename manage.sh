@@ -22,7 +22,7 @@ list_pastes() {
     sqlite3 "$DB_FILE" <<EOF
 .headers on
 .mode column
-SELECT id, language, uuid, expires_at FROM pastes;
+SELECT id, language, uuid as slug, strftime('%Y-%m-%d %I:%M %P', expires_at) as expires FROM pastes;
 EOF
 }
 
