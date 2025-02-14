@@ -32,11 +32,7 @@ delete_pastes() {
 
     if [[ -n "$ids" ]]; then
         while read -r id; do
-            if sqlite3 "$DB_FILE" "DELETE FROM pastes WHERE id = $id;"; then
-                echo "Successfully deleted item with ID $id from pastes"
-            else
-                echo "Failed to delete item with ID $id from pastes" >&2
-            fi
+            sqlite3 "$DB_FILE" "DELETE FROM pastes WHERE id = $id;";
         done <<< "$ids"
     else
         echo "No IDs found in the pastes database."
