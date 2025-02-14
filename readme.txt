@@ -15,16 +15,12 @@ Paste is based on Pastie Express with some tweaks
 Setup:
 
 1. git clone --recursive https://github.com/chrismccoy/paste
-1. make or node build.js
-3. make run or node app.js
+2. npm run build
+3. npm start
 
-Rebuild the Database:
+Rebuild the Database from Scratch:
 
-1. make rebuild or node db.js after removing db.sqlite file
-
-Clean up:
-
-1. make clean or rm -f db/db.sqlite && rm -rf node_modules
+1. npm run db
 
 List and Delete Pastes
 
